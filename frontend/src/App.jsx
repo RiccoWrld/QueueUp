@@ -7,7 +7,7 @@ function App() {
   const [session, setSession] = useState(null)
 
   useEffect(() => {
-    // 1. Check for an active session immediately when the app loads
+    //Check for an active session immediately when the app loads
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session)
     })
@@ -23,13 +23,15 @@ function App() {
   return (
     <div className="container">
       {!session ? (
-        // If NO session, show the Auth screen (Step 7)
+        // If NO session, show the Auth screen
         <Auth />
       ) : (
-        // If THERE IS a session, show the main app/feed (Step 9)
+        // If there is a session, show the main app/feed
         <div className="dashboard">
           <h1>Welcome, {session.user.email}</h1>
-          <button onClick={() => supabase.auth.signOut()}>Logout</button>
+          <button className="logout-button" onClick={() => supabase.auth.signOut()}>
+            Logout
+          </button>
           <p>Next: Building your LFG Feed!</p>
         </div>
       )}
